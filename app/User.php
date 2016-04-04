@@ -23,4 +23,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    /* @param string $username The username
+     * @param string $password Plain text password
+     * @return bool|user The user if the password matches the user's stored password, false otherwise.
+     */
+    public function authenticate($username, $password)
+    {
+        $user = User::where('username', $username)->first();
+        if (!Hash::check($password, $user->password)) {
+            return false;
+        }
+        return $user;
+    }
 }
