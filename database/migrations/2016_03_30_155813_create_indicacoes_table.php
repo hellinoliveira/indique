@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndicacaoesTable extends Migration
+class CreateIndicacoesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,6 @@ class CreateIndicacaoesTable extends Migration
             $table->text('descricao');
             $table->string('situacao');
             $table->string('motivo_objecao')->nullable();
-            //todo movimentacao[mudou status, registra o motivo]
             $table->timestamps();
 
             $table->foreign('cliente_id')
