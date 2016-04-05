@@ -14,16 +14,16 @@ class CreateIndicacoesTable extends Migration
     {
         Schema::create('indicacoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('empresa_id')->unsigned();
             $table->text('descricao');
             $table->string('situacao');
             $table->string('motivo_objecao')->nullable();
             $table->timestamps();
 
-            $table->foreign('cliente_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('clientes');
+                ->on('users');
             $table->foreign('empresa_id')
                 ->references('id')
                 ->on('empresas');

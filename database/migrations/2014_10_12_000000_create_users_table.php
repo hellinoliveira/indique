@@ -17,6 +17,24 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('photo');
+            $table->string("empresa");
+            $table->string("cargo");
+            $table->string("endereco");
+            $table->string("bairro");
+            $table->string("cep");
+            $table->string("cidade");
+            $table->string("UF");
+            $table->string("telefone");
+            $table->string("telefone_contato");
+//            dados bancarios
+            $table->string("banco");
+            $table->string("agencia");
+            $table->string("conta");
+            $table->string("operacao");
+            $table->string("nome_titular_conta");
+            $table->string("cpf_titular_conta");
+            $table->boolean("is_admin")->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

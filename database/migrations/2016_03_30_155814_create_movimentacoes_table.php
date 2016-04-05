@@ -15,7 +15,7 @@ class CreateMovimentacoesTable extends Migration
         if (!Schema::hasTable('movimentacoes')) {
             Schema::create('movimentacoes', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string("indicacao_id")->unsigned();
+                $table->integer("indicacao_id")->unsigned();
                 $table->string("situacao_anterior");
                 $table->string("situacao_atual");
                 $table->string("observacao");
