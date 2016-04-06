@@ -12,7 +12,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'photo', 'empresa', 'cargo',
+        'endereco', 'bairro', 'cep', 'cidade', 'UF', 'telefone',
+        'telefone_contato', 'banco', 'agencia', 'conta',
+        'operacao', 'nome_titular_conta',
+        'cpf_titular_conta'
     ];
 
     /**
@@ -21,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'is_admin'
     ];
 
 
@@ -36,5 +40,14 @@ class User extends Authenticatable
             return false;
         }
         return $user;
+    }
+
+    /**
+     *Um usuario pode possuir varias indicacoes
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function indicacoes()
+    {
+        return $this->hasMany('App\Article');
     }
 }
