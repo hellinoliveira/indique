@@ -14,7 +14,8 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->increments('id');
-//            dados básicos
+            $table->integer('indicacao_id');
+//            dados bÃ¡sicos
             $table->string("nome");
             $table->string("ramo");
             $table->string("nome_contato");
@@ -31,6 +32,10 @@ class CreateEmpresasTable extends Migration
             $table->string("telefone_contato");
             $table->boolean("ativo");
             $table->timestamps();
+
+            $table->foreign('indicacao_id')
+                ->references('id')
+                ->on('indicacoes');
         });
     }
 

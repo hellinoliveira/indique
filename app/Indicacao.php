@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Indicacao extends Model
 {
-    //Quando o plural for irregular a tabela deverá ser sobrescrita
+    //Quando o plural for irregular a tabela deverÃ¡ ser sobrescrita
     protected $table = 'indicacoes';
 
     protected $fillable = [
@@ -19,9 +19,18 @@ class Indicacao extends Model
      * Uma indicacao pertence a um cliente
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cliente()
+    public function user()
     {
-        return $this->belongsTo('App\Cliente');
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Uma indicacao possui uma empresa
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function empresa()
+    {
+        return $this->hasOne('App\Empresa');
     }
 
     /**

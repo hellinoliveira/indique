@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('usuarios', 'UsersController',
         array('only' => array('show', 'store', 'destroy', 'update')));
 
+    Route::resource('indicacoes', 'IndicacoesController');
 
     Route::controllers([
         'auth' => 'Auth\AuthController',
