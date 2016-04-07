@@ -48,6 +48,6 @@ class User extends Authenticatable
      */
     public function indicacoes()
     {
-        return $this->hasMany('App\Article');
+        return $this->hasMany('App\Indicacao');
     }
 }
