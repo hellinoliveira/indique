@@ -112,6 +112,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | A provider for Enums in Laravel.
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the log settings for your application. Out of
+    | the box, Laravel uses the Monolog PHP logging library. This gives
+    | you a variety of powerful log handlers / formatters to utilize.
+    |
+    | Available command php artisan make:enum Fruit
+    |
+    */
+
+    'EnumMap' => 'Artisaninweb\Enum\Facades\EnumFacade',
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -148,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Artisaninweb\Enum\EnumServiceProvider::class,
 
         /*
          * Application Service Providers...
