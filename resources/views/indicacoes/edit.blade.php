@@ -5,7 +5,7 @@
     <h1 class="text-center">Indicação</h1>
     <hr/>
 
-    {{ Form::model($indicacao, array('method'=> 'PATCH', 'url' => array('indicacao', $indicacao->id), 'class' => 'form-horizontal col-sm-10'))}}
+    {{ Form::model($empresa, array('method'=> 'PATCH', 'url' => array('indicacao', $indicacao->id), 'class' => 'form-horizontal col-sm-10'))}}
 
     <div class="form-group">
         {{ Form::label('nome', 'Nome', ['class' => 'col-sm-1 control-label']) }}

@@ -18,8 +18,8 @@ class IndicacoesController extends Controller
     {
         if (Auth::User()->is_admin) {
             $indicacoes = Indicacao::latest()->get();
-        }else{
-            $indicacoes = Auth::user()->indicacoes()->get();
+        } else {
+            $indicacoes = Empresa::all();
         }
 
 
@@ -34,11 +34,12 @@ class IndicacoesController extends Controller
     public function show($id)
     {
         $indicacao = Indicacao::find($id);
-        return view('indicacoes.edit', $indicacao);
-
+        $empresa = Empresa::where('indicacao_id' , '=' , $id)->get();
+        return view('indicacoes.edit', compact('indicacao', 'empresa'));
     }
 
     /**
+     * Nova indicacao
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -46,15 +47,11 @@ class IndicacoesController extends Controller
         return view('indicacoes.create');
     }
 
-    public function edit($id)
-    {
-        $indicacao = Indicacao::findOrFail($id);
-        $empresa = Empresa::find($indicacao->empresa_id);
-//        dd($empresa);
-
-        return view('indicacoes.edit', compact($indicacao, $empresa));
-    }
-
+    /**
+     * preenche e salva a indicação
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store(Request $request)
     {
         $input = $request->all();
@@ -65,6 +62,7 @@ class IndicacoesController extends Controller
     }
 
     /**
+     * preenche e salva a indicacao
      * @param $input
      */
     public function preencherSalvarIndicacao($input)
