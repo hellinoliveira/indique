@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movimentacao extends Model
 {
+    //Quando o plural for irregular a tabela deverá ser sobrescrita
     protected $table = 'movimentacoes';
 
 
