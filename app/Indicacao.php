@@ -12,6 +12,22 @@ class Indicacao extends Model
     protected $fillable = [
         'descricao',
         'situacao',
+        'motivo_objecao',
+        'descricao',
+        'situacao',
+        'nome_empresa',
+        'ramo_empresa',
+        'nome_contato',
+        'cargo_contato',
+        'cpnj',
+        'cidade',
+        'UF',
+        'endereco',
+        'bairro',
+        'quantidade_alunos',
+        'quantidade_unindades',
+        'telefone',
+        'telefone_conta',
         'motivo_objecao'
     ];
 
@@ -22,15 +38,6 @@ class Indicacao extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    /**
-     * Uma indicacao possui uma empresa
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function empresa()
-    {
-        return $this->hasOne('App\Empresa');
     }
 
     /**

@@ -15,7 +15,7 @@ class CreateIndicacoesTable extends Migration
         Schema::create('indicacoes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->sstext('descricao');
+            $table->text('descricao');
             $table->string('situacao');
             $table->string('nome_empresa');
             $table->string('ramo_empresa');

@@ -19,7 +19,7 @@ class IndicacoesController extends Controller
         if (Auth::User()->is_admin) {
             $indicacoes = Indicacao::latest()->get();
         } else {
-            $indicacoes = Empresa::all();
+            $indicacoes = Auth::user()->indicacoes()->latest()->get();
         }
 
 
@@ -34,8 +34,7 @@ class IndicacoesController extends Controller
     public function show($id)
     {
         $indicacao = Indicacao::find($id);
-        $empresa = Empresa::where('indicacao_id' , '=' , $id)->get();
-        return view('indicacoes.edit', compact('indicacao', 'empresa'));
+        return view('indicacoes.edit', compact('indicacao'));
     }
 
     /**
@@ -48,32 +47,16 @@ class IndicacoesController extends Controller
     }
 
     /**
-     * preenche e salva a indicação
+     * cria a indicação e vincula com o usuário
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $inputEmpresa = $this->preencherSalvarIndicacao($input);
-        Empresa::create($inputEmpresa);
+        $request->offsetSet('situacao', SituacaoIndicacao::ANALISE);
+        Auth::user()->indicacoes()->create($request->all());
 
         return view('indicacoes.index');
     }
 
-    /**
-     * preenche e salva a indicacao
-     * @param $input
-     */
-    public function preencherSalvarIndicacao($input)
-    {
-        $indicacao = new Indicacao();
-        $indicacao->descricao = $input['descricao'];
-        $indicacao->situacao = SituacaoIndicacao::ANALISE;
-        Auth::user()->indicacoes()->create($indicacao);
-//        $indicacao->save();
-        $input['indicacao_id'] = $indicacao->id;
-
-        return $input;
-    }
 }
