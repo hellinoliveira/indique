@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Empresa;
 use App\Enums\SituacaoIndicacao;
+use App\Http\Requests\IndicacaoRequest;
 use App\Indicacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,15 +49,32 @@ class IndicacoesController extends Controller
 
     /**
      * cria a indicação e vincula com o usuário
-     * @param Request $request
+     * @param IndicacaoRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(Request $request)
+    public function store(IndicacaoRequest $request)
     {
         $request->offsetSet('situacao', SituacaoIndicacao::ANALISE);
         Auth::user()->indicacoes()->create($request->all());
 
         return view('indicacoes.index');
+    }
+
+    public function update(IndicacaoRequest $request, $id)
+    {
+        $indicacao = Indicacao::findOrFail($id);
+
+        $indicacao->update($request->all());
+
+        return redirect('indicacoes');
+
+    }
+
+    public function edit($id)
+    {
+        $indicacao = Indicacao::findOrFail($id);
+
+        return view('perfil.edit', compact('user'));
     }
 
 }
