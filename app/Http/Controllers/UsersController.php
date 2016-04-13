@@ -50,7 +50,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new Cliente($request->all());
+        $user = new User($request->all());
         $user->save();
 
         return $user;
@@ -64,7 +64,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = Cliente::find($id);
+        $user = User::find($id);
         return $user;
     }
 
