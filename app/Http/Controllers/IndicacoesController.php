@@ -74,7 +74,7 @@ class IndicacoesController extends Controller
     {
         $indicacao = Indicacao::findOrFail($id);
 
-        return view('perfil.edit', compact('user'));
+        return view('indicacoes.edit', compact('indicacao'));
     }
 
 }

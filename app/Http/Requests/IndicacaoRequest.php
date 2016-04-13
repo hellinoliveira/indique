@@ -25,7 +25,6 @@ class IndicacaoRequest extends Request
     {
         return [
             'descricao' => 'required',
-            'situacao' => 'required',
             'nome_empresa' => 'required',
             'ramo_empresa' => 'required',
             'nome_contato' => 'required',

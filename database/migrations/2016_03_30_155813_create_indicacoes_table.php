@@ -21,7 +21,7 @@ class CreateIndicacoesTable extends Migration
             $table->string('ramo_empresa');
             $table->string('nome_contato');
             $table->string('cargo_contato');
-            $table->string('cpnj')->nullable();
+            $table->string('cnpj')->nullable();
             $table->string('cidade');
             $table->string('UF');
             $table->string('endereco')->nullable();

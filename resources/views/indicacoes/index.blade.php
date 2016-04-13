@@ -137,12 +137,13 @@
     <hr/>
     @foreach( $indicacoes as $indicacao )
         <article>
-            <a href="{{ url('indicacoes', $indicacao->id) }}">{{ $indicacao->nome_empresa }}</a>
+            <a href="{{ action('IndicacoesController@edit', $indicacao->id) }}">{{ $indicacao->nome_empresa }}</a>
             <!-- STEPS -->
             <section id="Steps" class="steps-section">
 
                 <h2 class="steps-header">
-                    <a href="{{ url('indicacoes', $indicacao->id) }}">{{ $indicacao->descricao }}</a>
+                    <a href="{{ action('IndicacoesController@edit', $indicacao->id) }}">{{ $indicacao->nome_empresa }}</a>
+                    {{--<a href="{{ url('indicacoes', $indicacao->id) }}">{{ $indicacao->descricao }}</a>--}}
                 </h2>
 
                 <div class="steps-timeline">
