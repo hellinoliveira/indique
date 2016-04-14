@@ -31,6 +31,7 @@ class CreateIndicacoesTable extends Migration
             $table->string('telefone');
             $table->string('telefone_contato')->nullable();
             $table->string('motivo_objecao')->nullable();
+            $table->string('observacao')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

@@ -83,7 +83,11 @@
     </div>
     {{ Form::label('situacao', 'Situação', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
-        {{ Form::label('situacao', null, ['class' =>'control-label']) }}
+        @if(Auth::User()->is_admin)
+            {{ Form::select('situacao', $situacoes , null, ['class' =>'form-control']) }}
+        @else
+            <p>{{ $indicacao->situacao }}</p>
+        @endif
     </div>
 </div>
 

@@ -6,7 +6,6 @@ use App\Empresa;
 use App\Enums\SituacaoIndicacao;
 use App\Http\Requests\IndicacaoRequest;
 use App\Indicacao;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IndicacoesController extends Controller
@@ -19,12 +18,14 @@ class IndicacoesController extends Controller
     {
         if (Auth::User()->is_admin) {
             $indicacoes = Indicacao::latest()->get();
+
+            return view('indicacoes.list', compact('indicacoes'));
+
         } else {
             $indicacoes = Auth::user()->indicacoes()->latest()->get();
+
+            return view('indicacoes.index', compact('indicacoes'));
         }
-
-
-        return view('indicacoes.index', compact('indicacoes'));
     }
 
     /**
@@ -44,7 +45,8 @@ class IndicacoesController extends Controller
      */
     public function create()
     {
-        return view('indicacoes.create');
+        $situacoes = SituacaoIndicacao::getEnumValues();
+        return view('indicacoes.create', compact('situacoes'));
     }
 
     /**
@@ -73,8 +75,9 @@ class IndicacoesController extends Controller
     public function edit($id)
     {
         $indicacao = Indicacao::findOrFail($id);
+        $situacoes = SituacaoIndicacao::getEnumValues();
 
-        return view('indicacoes.edit', compact('indicacao'));
+        return view('indicacoes.edit', compact('indicacao', 'situacoes'));
     }
 
 }
