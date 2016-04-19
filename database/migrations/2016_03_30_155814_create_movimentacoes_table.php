@@ -15,11 +15,11 @@ class CreateMovimentacoesTable extends Migration
         if (!Schema::hasTable('movimentacoes')) {
             Schema::create('movimentacoes', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer("indicacao_id")->unsigned();
-                $table->string("situacao_anterior");
-                $table->string("situacao_atual");
-                $table->string("observacao");
-                $table->boolean("lido");
+                $table->integer('indicacao_id')->unsigned();
+                $table->string('situacao_anterior');
+                $table->string('situacao_atual');
+                $table->string('observacao_movimentacao');
+                $table->boolean('lido')->default(false);
                 $table->timestamps();
 
 
