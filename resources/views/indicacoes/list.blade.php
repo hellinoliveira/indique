@@ -6,26 +6,47 @@
             border-top: 3px solid orange;
         }
 
+        .ANALISE .fa {
+            color: orange;
+        }
+
         .COMERCIAL {
             border-top: 3px solid #ffff00;
+        }
+
+        .COMERCIAL .fa {
+            color: #ffff00;
         }
 
         .VENDIDO {
             border-top: 3px solid lightgreen;
         }
 
+        .VENDIDO .fa {
+            color: lightgreen;
+        }
+
         .DEPOSITADO {
             border-top: 3px solid darkgreen;
+        }
+
+        .DEPOSITADO .fa {
+            color: darkgreen;
         }
 
         .OBJECAO {
             border-top: 3px solid red;
         }
+
+        .OBJECAO .fa {
+            color: red;
+        }
+
     </style>
     <link href="{{  url('assets/css/bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{  url('assets/css/rotating-card.css') }}" rel="stylesheet"/>
 
-    <h1 class="text-center">Indicacões</h1>
+    <h1 class="text-center">Indicações</h1>
     <hr/>
     @foreach( $indicacoes as $indicacao )
         <div class="col-md-3">
@@ -33,8 +54,9 @@
             <div class="card-container">
                 <div class="card {{ $indicacao->cor_situacao }}">
                     <div class="front">
-                        <div style="margin: 0 auto; color: orange; font-size: 60px;" class="text-center">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <div style="margin: 0 auto; font-size: 60px;"
+                             class="text-center {{ $indicacao->nome_situacao }}">
+                            <i class="fa {{ $indicacao->icon_situacao  }}" aria-hidden="true"></i>
                         </div>
                         <div class="content">
                             <div class="main">

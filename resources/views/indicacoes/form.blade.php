@@ -84,9 +84,11 @@
     {{ Form::label('situacao', 'Situação', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
         @if(Auth::User()->is_admin)
-            {{ Form::select('situacao', $situacoes , null, ['class' =>'form-control']) }}
+            {{ Form::select('situacao', $situacoes , $indicacao->nome_situacao, ['class' =>'form-control']) }}
+            {{ Form::input('hidden', 'situacao_anterior', $indicacao->nome_situacao , null, ['class' =>'form-control']) }}
+            {{ Form::input('hidden', 'situacao_atual', $indicacao->situacao , null, ['class' =>'form-control']) }}
         @else
-            <p>{{ $indicacao->situacao }}</p>
+{{--            <p>{{ $indicacao->situacao }}</p>--}}
         @endif
     </div>
 </div>

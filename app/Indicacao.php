@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Enums\CorSituacaoIndicacao;
+use App\Enums\IconSituacaoIndicacao;
 use App\Enums\SituacaoIndicacao;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,6 @@ class Indicacao extends Model
     //Quando o plural for irregular a tabela deverá ser sobrescrita
     protected $table = 'indicacoes';
 
-//    protected $cor_situacao = CorSituacaoIndicacao::ANALISE;
 
     protected $fillable = [
         'descricao',
@@ -46,16 +45,22 @@ class Indicacao extends Model
         return $situacao->getConstValue();
     }
 
-//    public function setCorSituacaoAttribute($value)
-//    {
-//        $this->cor_situacao = $value;
-//    }
 
-    public function getCorSituacaoAttribute()
+    public function getNomeSituacaoAttribute()
     {
         foreach (SituacaoIndicacao::getEnumValues() as $enum) {
             if ($enum->getConstValue() == $this->situacao) {
                 return $enum->getConstName();
+            }
+        }
+    }
+
+    public function getIconSituacaoAttribute()
+    {
+        foreach (SituacaoIndicacao::getEnumValues() as $enum) {
+            if ($enum->getConstValue() == $this->situacao) {
+                $icone = IconSituacaoIndicacao::byName($enum->getConstName());
+                return $icone->getConstValue();
             }
         }
     }
@@ -73,7 +78,7 @@ class Indicacao extends Model
      * Uma indicacao pode possuir varias movimentacoes
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function movimentacao()
+    public function movimentacoes()
     {
         return $this->hasMany('App\Movimentacao');
     }

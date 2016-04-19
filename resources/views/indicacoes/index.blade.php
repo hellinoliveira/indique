@@ -3,59 +3,62 @@
 @section('content')
     <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
+    <script src="{{  url('assets/js/modernizr.js') }}"></script>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
+          type='text/css'>
+
     <h1 class="text-center">Minhas indicacões</h1>
     <hr/>
-    @foreach( $indicacoes as $indicacao )
-        {{--<article>--}}
-        <a href="{{ action('IndicacoesController@edit', $indicacao->id) }}">{{ $indicacao->nome_empresa }}</a>
-        <!-- STEPS -->
-        <section class="cd-horizontal-timeline">
-            <div class="timeline">
-                <div class="events-wrapper">
-                    <div class="events">
-                        <ol>
-                            <li><a href="#0" data-date="{{ $indicacao->created_at->format('d/m/Y') }}"
-                                   class="selected">{{ $indicacao->created_at->format('d/m/y') }}</a></li>
-                            @foreach( $indicacoes as $indicacao )<!-- movimentacoes cria os indices e depois os textos -->
-                                <li><a href="#0" data-date="{{ $indicacao->created_at->format('d/m/Y') }}">
-                                        {{ $indicacao->created_at->format('d/m/y') }}</a></li>
-                            @endforeach
-                        </ol>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @foreach( $indicacoes as $indicacao )
+            {{--<article>--}}
 
-                        <span class="filling-line" aria-hidden="true"></span>
-                    </div>
-                    <!-- .events -->
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$indicacao->id}}"
+                           aria-expanded="true" aria-controls="collapse{{$indicacao->id}}">
+                            {{ $indicacao->nome_empresa }}
+                        </a>
+                        <a href="{{ action('IndicacoesController@edit', $indicacao->id) }}">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </h4>
                 </div>
-                <!-- .events-wrapper -->
+                <div id="collapse{{$indicacao->id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
 
-                <ul class="cd-timeline-navigation">
-                    <li><a href="#0" class="prev inactive">Prev</a></li>
-                    <li><a href="#0" class="next">Next</a></li>
-                </ul>
-                <!-- .cd-timeline-navigation -->
+                        <ul class="timeline" id="timeline">
+                            <li class="li complete">
+                                <div class="timestamp">
+                                    <span class="author">Indicação realizada</span>
+                                    <span class="date">{{ $indicacao->created_at->format('d/m/Y') }}</span>
+                                </div>
+                                <div class="status ANALISE">
+                                    <p class="statusIndicacao ANALISE "><i class="fa fa-clock-o"></i></p>
+                                    <h4>Em análise</h4>
+                                </div>
+                            </li>
+                            @foreach( $indicacao->movimentacoes as $movimentacao )
+                                <li class="li complete">
+                                    <div class="timestamp">
+                                        <span class="author">{{ $movimentacao->situacao_atual }}</span>
+                                        <span class="date">{{ $movimentacao->created_at->format('d/m/Y') }}</span>
+                                    </div>
+                                    <div class="status {{ $movimentacao->nome_situacao}}">
+                                        <p class="statusIndicacao {{ $movimentacao->nome_situacao}}"><i
+                                                    class="fa {{ $movimentacao->icon_situacao  }}"></i></p>
+                                        <h4>{{ $movimentacao->situacao_atual }}</h4>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        </li>
+                    </div>
+                </div>
             </div>
-            <!-- .timeline -->
-
-            <div class="events-content">
-                <ol>
-                    <li class="selected" data-date="{{ $indicacao->created_at->format('d/m/Y') }}">
-                        <h6>Indicação realizada</h6>
-
-                        <p>
-                            O primeiro passo foi dado! Agora basta aguardar um dos nossos representantes entrar em
-                            contato com a empresa indicacada.
-                        </p>
-                    </li>
-
-
-                </ol>
-            </div>
-            <!-- .events-content -->
-        </section>
-        {{--</article>--}}
-    @endforeach
+        @endforeach
+    </div>
     <a href="{{ url('indicacoes/create')}}"><i class="fa fa-plus"></i>Nova indicação</a>
-    <script src="{{  url('assets/js/jquery-2.1.4.js') }}"></script>
-    <script src="{{  url('assets/js/jquery.mobile.custom.js') }}"></script>
-    <script src="{{  url('assets/js/main.js') }}"></script>
 @endsection

@@ -6,6 +6,7 @@ use App\Empresa;
 use App\Enums\SituacaoIndicacao;
 use App\Http\Requests\IndicacaoRequest;
 use App\Indicacao;
+use App\Movimentacao;
 use Illuminate\Support\Facades\Auth;
 
 class IndicacoesController extends Controller
@@ -67,6 +68,8 @@ class IndicacoesController extends Controller
         $indicacao = Indicacao::findOrFail($id);
 
         $indicacao->update($request->all());
+//       dd($request->all());
+        $indicacao->movimentacao->create($request->all());
 
         return redirect('indicacoes');
 
