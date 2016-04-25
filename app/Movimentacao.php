@@ -11,8 +11,7 @@ class Movimentacao extends Model
     //Quando o plural for irregular a tabela deverá ser sobrescrita
     protected $table = 'movimentacoes';
 
-    protected $fillable = ['
-        situacao_anterior', 'situacao_atual',
+    protected $fillable = ['situacao_anterior', 'situacao_atual',
         'observacao_movimentacao', 'lido'];
 
 

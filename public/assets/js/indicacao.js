@@ -1,0 +1,3 @@
+abrirModal = function () {
+    $('#movimentacaoModal').modal();
+}

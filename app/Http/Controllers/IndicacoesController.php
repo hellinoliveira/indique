@@ -73,9 +73,11 @@ class IndicacoesController extends Controller
     {
         $indicacao = Indicacao::findOrFail($id);
 
+        $request->offsetSet('situacao_atual', $request['situacao']);
         $indicacao->update($request->all());
-//       dd($request->all());
-        $indicacao->movimentacao->create($request->all());
+        if ($request['situacao'] != $request['situacao_anterior']) {
+            $indicacao->movimentacoes()->create($request->all());
+        }
 
         return redirect('indicacoes');
 
