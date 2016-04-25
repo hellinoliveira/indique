@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class IndicacoesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Mostra todas indicacoes ao adm ou as indicacoes do usuário
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

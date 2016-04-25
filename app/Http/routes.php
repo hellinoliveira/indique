@@ -11,11 +11,16 @@
 |
 */
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 
     Route::resource('perfil', 'UsersController',
         array('only' => array('edit', 'update')));
@@ -24,14 +29,5 @@ Route::group(['middleware' => ['web']], function () {
         array('only' => array('show', 'store', 'destroy', 'update')));
 
     Route::resource('indicacoes', 'IndicacoesController');
-
-    Route::controllers([
-        'auth' => 'Auth\AuthController',
-        'password' => 'Auth\PasswordController',
-    ]);
-
-    Route::auth();
-
-    Route::get('/home', 'HomeController@index');
 
 });
