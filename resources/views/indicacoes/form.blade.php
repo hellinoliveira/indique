@@ -5,7 +5,7 @@
     </div>
     {{ Form::label('ramo_empresa', 'Ramo', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
-        {{ Form::text('ramo_empresa', null, ['class' =>'form-control']) }}
+        {{ Form::select('ramo_empresa', $ramos , $indicacao->ramo_empresa, ['class' =>'form-control']) }}
     </div>
 </div>
 <div class="form-group">
@@ -13,12 +13,13 @@
     <div class="col-sm-4">
         {{ Form::text('nome_contato', null, ['class' =>'form-control']) }}
     </div>
-</div>
-<div class="form-group">
     {{ Form::label('cargo_contato', 'Cargo contato', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
         {{ Form::text('cargo_contato', null, ['class' =>'form-control']) }}
     </div>
+
+</div>
+<div class="form-group">
     {{ Form::label('cnpj', 'CNPJ', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
         {{ Form::text('cnpj', null, ['class' =>'form-control']) }}

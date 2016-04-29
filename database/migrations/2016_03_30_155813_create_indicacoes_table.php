@@ -28,10 +28,14 @@ class CreateIndicacoesTable extends Migration
             $table->string('bairro')->nullable();
             $table->string('quantidade_alunos')->nullable();
             $table->string('quantidade_unidades')->nullable();
+            $table->string('valor_indicacao')->nullable();
             $table->string('telefone');
             $table->string('telefone_contato')->nullable();
             $table->string('motivo_objecao')->nullable();
             $table->string('observacao')->nullable();
+//todo            campos preenchidos apos a proposta criada. Criar um servico rest para vincular as infos
+            $table->date('data_implantacao')->nullable();
+            $table->string('proposta')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

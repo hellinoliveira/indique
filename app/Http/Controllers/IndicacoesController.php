@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Empresa;
+use App\Enums\RamoEmpresa;
 use App\Enums\SituacaoIndicacao;
 use App\Http\Requests\IndicacaoRequest;
 use App\Indicacao;
-use App\Movimentacao;
 use Illuminate\Support\Facades\Auth;
 
 class IndicacoesController extends Controller
@@ -53,7 +52,8 @@ class IndicacoesController extends Controller
     public function create()
     {
         $situacoes = SituacaoIndicacao::getEnumValues();
-        return view('indicacoes.create', compact('situacoes'));
+        $ramos = RamoEmpresa::getEnumValues();
+        return view('indicacoes.create', compact('situacoes', 'ramos'));
     }
 
     /**
@@ -87,8 +87,9 @@ class IndicacoesController extends Controller
     {
         $indicacao = Indicacao::findOrFail($id);
         $situacoes = SituacaoIndicacao::getEnumValues();
+        $ramos = RamoEmpresa::getEnumValues();
 
-        return view('indicacoes.edit', compact('indicacao', 'situacoes'));
+        return view('indicacoes.edit', compact('indicacao', 'situacoes', 'ramos'));
     }
 
 }
