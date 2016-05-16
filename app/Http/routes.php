@@ -26,8 +26,11 @@ Route::group(['middleware' => ['web']], function () {
         array('only' => array('edit', 'update')));
 
     Route::resource('usuarios', 'UsersController',
-        array('only' => array('show', 'store', 'destroy', 'update')));
+        array('only' => array('index', 'show', 'store', 'destroy', 'update', 'filtro')));
 
     Route::resource('indicacoes', 'IndicacoesController');
 
+    Route::get('api/users/{user}', 'UsersController@show');
+
+    Route::post('api/users/filtro', 'UsersController@filtro');
 });

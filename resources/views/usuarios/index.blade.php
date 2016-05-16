@@ -3,104 +3,23 @@
 @section('content')
     <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
+    <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
     <script src="{{  url('assets/js/modernizr.js') }}"></script>
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
-          type='text/css'>
-    <style>
-        .user-painel {
-            border-radius: 6px;
-            box-shadow: 2px 11px 10px 5px #888888;
-            padding-left: 0;
-            padding-right: 0;
-            color: dimgray;
-        }
-
-        .user-painel img {
-            width: 75%;
-            margin: 0 auto;
-        }
-
-        .user-stat {
-            background-color: #f6f6f6;
-            border-top: 1px solid #e7e7e7;
-            padding: 6px;
-        }
-
-        .user-stat span {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-
-        .user-info {
-            padding: 3px;
-            margin-left: 15px;
-            overflow: hidden;
-        }
-
-        .profile-img-container {
-            position: relative;
-            /*display: inline-block; *//* added */
-            overflow: hidden; /* added */
-        }
-
-        .profile-img-container img {
-            opacity: 1;
-            /*width:100%;*/
-        }
-
-        /* remove if using in grid system */
-
-        .profile-img-container img:hover {
-            opacity: 0.1
-        }
-
-        .profile-img-container:hover a {
-            opacity: 1; /* added */
-            top: 0; /* added */
-            z-index: 500;
-        }
-
-        .profile-img-container:hover a span {
-            top: 50%;
-            position: absolute;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-        /* added */
-        .profile-img-container a {
-            display: block;
-            position: absolute;
-            top: -100%;
-            opacity: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            text-align: center;
-            color: inherit;
-        }
-
-        .modal-footer {
-            border-top: none;
-        }
-
-        .border-top {
-            border-top: 1px solid #e5e5e5;
-        }
-
-        .modal-body p {
-            padding: 10px 0 5px 0;
-            font-size: 90%;
-            font-weight: bold;
-        }
-    </style>
+    {{--<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'--}}
+          {{--type='text/css'>--}}
+    <meta name="_token" content="{{ csrf_token() }}" />
     <h1 class="text-center">Usuários</h1>
-
+    <select name="filtro" id="filtro" onchange="filtrarUsuarios()" data-path="{{ url('api/users/filtro')  }}">
+        <option value="1">Ativos</option>
+        <option value="2">Inativos</option>
+        <option value="3">Administradores</option>
+        <option value="4">Todos</option>
+    </select>
+    <br></br>
     @foreach($users as $user)
         <div class="col-xs-offset-1 col-xs-10 col-md-2 user-painel">
             <div class="profile-img-container">
-                <img src="{{  url('assets/img/289046.jpg') }}" class="img-responsive img-circle"
+                <img src="{{  url('assets/img/profile/', $user->photo) }}" class="img-responsive img-circle"
                      alt="Responsive image">
 
                 <a><span class="fa fa-plus fa-5x" id="usuarioModalAnchor" data-usuario="" data-toggle="modal"
@@ -225,7 +144,9 @@
                             </div>
                         </div>
                         <div class="col-md-offset-3 col-md-9">
-                            <p>Observação<small>(Visível apenas para administrador)</small></p>
+                            <p>Observação
+                                <small>(Visível apenas para administrador)</small>
+                            </p>
                             <textarea name="observacao" id="observacao" style="width: 90%" rows="5"></textarea>
                         </div>
                     </div>
