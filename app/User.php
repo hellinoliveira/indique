@@ -28,6 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token', 'is_admin'
     ];
 
+    protected function getPhoto()
+    {
+        if($this->getPhoto() == ''){
+            return 'blank_user.jpg';
+        }
+    }
+
 
     /* @param string $username The username
      * @param string $password Plain text password
