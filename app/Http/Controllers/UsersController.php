@@ -31,18 +31,9 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $titular = $request->input('nome_titular_conta') == '' ? $request->input('name') : $request->input('nome_titular_conta');
-        $request->offsetSet('nome_titular_conta', $titular);
-
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $nomeArquivo = time() . '.' . $avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(300,300)->save( public_path('assets/img/profile/' . $nomeArquivo));
-            $request->offsetSet('photo', $nomeArquivo);
-        }
+        $this->preencherCamposUsuario($request);
 
         $user->update($request->all());
-//        dd($user->$avatar);
 
         return view('perfil.edit', compact('user'));
     }
@@ -87,9 +78,24 @@ class UsersController extends Controller
 
     public function filtro(Request $request)
     {
-//        $request->input('filtro');
-//        $user = User::find($id);
-        return $request->all();
+        $filtro = $request->input('filtro');
+        switch($filtro){
+            case 1:
+                $users = User::where('is_ativo', true)->get();
+                break;
+            case 2:
+                $users = User::where('is_ativo', false)->get();
+                break;
+            case 3:
+                $users = User::where('is_admin', true)->get();
+                break;
+            case 4:
+                $users = User::all();
+                break;
+        }
+
+
+        return view('usuarios.index', compact('users', '$filtro'));
     }
 
     /**
@@ -102,5 +108,22 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+    }
+
+    /**
+     * Preenche o nome titular e foto do usuario
+     * @param Request $request
+     */
+    public function preencherCamposUsuario(Request $request)
+    {
+        $titular = $request->input('nome_titular_conta') == '' ? $request->input('name') : $request->input('nome_titular_conta');
+        $request->offsetSet('nome_titular_conta', $titular);
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $nomeArquivo = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save(public_path('assets/img/profile/' . $nomeArquivo));
+            $request->offsetSet('photo', $nomeArquivo);
+        }
     }
 }

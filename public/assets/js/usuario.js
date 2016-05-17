@@ -12,22 +12,6 @@ $('.fa-plus').click(function () {
     });
 });
 
-filtrarUsuarios = function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        data: 'filtro :' + $('#filtro').val(),
-        url: $('#filtro').data('path'),
-        success: function (result) {
-            console.log(result)
-        }
-    });
-};
-
 $('#usuarioModal').on('show.bs.modal', function () {
     var modal = $(this)
     modal.find('.modal-title').text('' + usuario.name)

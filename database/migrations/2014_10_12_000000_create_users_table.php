@@ -36,6 +36,7 @@ class CreateUsersTable extends Migration
             $table->string("nome_titular_conta")->nullable();
             $table->string("cpf_titular_conta")->nullable();
             $table->boolean("is_admin")->default(false);
+            $table->boolean("is_ativo")->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

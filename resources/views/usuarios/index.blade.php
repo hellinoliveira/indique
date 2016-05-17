@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+
     <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
     <script src="{{  url('assets/js/modernizr.js') }}"></script>
-    {{--<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'--}}
-    {{--type='text/css'>--}}
-    <meta name="_token" content="{{ csrf_token() }}"/>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
+          type='text/css'>
     <h1 class="text-center">Usuários</h1>
-    <select name="filtro" id="filtro" onchange="filtrarUsuarios()" data-path="{{ url('api/users/filtro')  }}">
-        <option value="1">Ativos</option>
-        <option value="2">Inativos</option>
-        <option value="3">Administradores</option>
-        <option value="4">Todos</option>
-    </select>
+    {{ Form::open(array('method'=> 'POST', 'url' => 'api/users/filtro')) }}
+        {{ Form::select('filtro', array('Ativos', 'Inativos','Administradores', 'Todos'), null , array('onchange' => 'this.form.submit()') )}}
+    {{--<select name="filtro" id="filtro" onchange="this.form.submit()">--}}
+        {{--<option value="1">Ativos</option>--}}
+        {{--<option value="2">Inativos</option>--}}
+        {{--<option value="3">Administradores</option>--}}
+        {{--<option value="4">Todos</option>--}}
+    {{--</select>--}}
+    {{ Form::close() }}
     <br>
     @foreach($users as $user)
         <div class="col-xs-offset-1 col-xs-10 col-md-2 user-painel">
