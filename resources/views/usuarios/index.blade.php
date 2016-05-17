@@ -6,8 +6,8 @@
     <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
     <script src="{{  url('assets/js/modernizr.js') }}"></script>
     {{--<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'--}}
-          {{--type='text/css'>--}}
-    <meta name="_token" content="{{ csrf_token() }}" />
+    {{--type='text/css'>--}}
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <h1 class="text-center">Usuários</h1>
     <select name="filtro" id="filtro" onchange="filtrarUsuarios()" data-path="{{ url('api/users/filtro')  }}">
         <option value="1">Ativos</option>
@@ -15,7 +15,7 @@
         <option value="3">Administradores</option>
         <option value="4">Todos</option>
     </select>
-    <br></br>
+    <br>
     @foreach($users as $user)
         <div class="col-xs-offset-1 col-xs-10 col-md-2 user-painel">
             <div class="profile-img-container">

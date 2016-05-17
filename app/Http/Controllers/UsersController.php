@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Image;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,16 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $titular = $request->input('nome_titular_conta') == '' ? $request->input('name') : $request->input('nome_titular_conta');
         $request->offsetSet('nome_titular_conta', $titular);
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $nomeArquivo = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300,300)->save( public_path('assets/img/profile/' . $nomeArquivo));
+            $request->offsetSet('photo', $nomeArquivo);
+        }
+
         $user->update($request->all());
+//        dd($user->$avatar);
 
         return view('perfil.edit', compact('user'));
     }

@@ -72,6 +72,11 @@
     color: inherit;
 }
 
+.profile-avatar {
+    width: 200px;
+    height: 200px;
+}
+
 .modal-footer {
     border-top: none;
 }
