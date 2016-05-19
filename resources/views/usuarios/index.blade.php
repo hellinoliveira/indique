@@ -2,12 +2,8 @@
 
 @section('content')
 
-    <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
-    <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
     <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
-    <script src="{{  url('assets/js/modernizr.js') }}"></script>
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
-          type='text/css'>
+
     <h1 class="text-center">Usuários</h1>
     {{ Form::open(array('method'=> 'POST', 'url' => 'usuarios/filtro', 'class' =>'form-horizontal')) }}
     <div class="form-group col-sm-2">
