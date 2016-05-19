@@ -15,6 +15,27 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Display a listing of the resource.
+     * @return mixed
+     */
+    public function index()
+    {
+
+        $users = User::where([
+            ['is_ativo', true],
+            ['is_admin', false]
+        ])->orderBy('name')->get();
+        $selecionado = 0;
+        $ordenado = 0;
+        return view('usuarios.index', compact('users', 'selecionado', 'ordenado'));
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Editar o perfil do usuario
+     */
     public function edit()
     {
         $user = Auth::User();
@@ -38,17 +59,6 @@ class UsersController extends Controller
         return view('perfil.edit', compact('user'));
     }
 
-    /**
-     * Display a listing of the resource.
-     * @return mixed
-     */
-    public function index()
-    {
-
-        $users = User::where('is_admin', false)->get();
-
-        return view('usuarios.index', compact('users'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -76,26 +86,55 @@ class UsersController extends Controller
         return $user;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Filtra os usuários
+     */
     public function filtro(Request $request)
     {
-        $filtro = $request->input('filtro');
-        switch($filtro){
-            case 1:
-                $users = User::where('is_ativo', true)->get();
-                break;
-            case 2:
-                $users = User::where('is_ativo', false)->get();
-                break;
-            case 3:
-                $users = User::where('is_admin', true)->get();
-                break;
-            case 4:
-                $users = User::all();
-                break;
+        $selecionado = $request->input('filtro');
+        $ordenado = $request->input('ordem');
+        $orderBy = 'name';
+
+        $by = 'asc';
+        if ($ordenado == 1) {
+            $by = 'desc';
+        }
+        if ($ordenado == 2) {
+            $orderBy = 'created_at';
         }
 
 
-        return view('usuarios.index', compact('users', '$filtro'));
+        switch ($selecionado) {
+            case 0:
+                $users = User::where([
+                    ['is_ativo', true],
+                    ['is_admin', false]
+                ])->orderBy($orderBy, $by)
+                    ->get();
+                break;
+            case 1:
+                $users = User::where('is_ativo', false)
+                    ->orderBy($orderBy, $by)
+                    ->get();
+                break;
+            case 2:
+                $users = User::where('is_admin', true)
+                    ->orderBy($orderBy, $by)
+                    ->get();
+
+                break;
+            case 3:
+                $users = User::orderBy($orderBy, $by)->get();
+                break;
+        }
+        if ($ordenado == 3 || $ordenado == 4) {
+            $users = $this->ordenar($users, $ordenado);
+        }
+
+
+        return view('usuarios.index', compact('users', 'selecionado', 'ordenado'));
     }
 
     /**
@@ -125,5 +164,26 @@ class UsersController extends Controller
             Image::make($avatar)->resize(300, 300)->save(public_path('assets/img/profile/' . $nomeArquivo));
             $request->offsetSet('photo', $nomeArquivo);
         }
+    }
+
+
+    /**
+     * @param $users
+     * @param $ordenado
+     * @return mixed
+     */
+    public function ordenar($users, $ordenado)
+    {
+        if ($ordenado == 3) {
+            $sorted = $users->sortByDesc(function ($user, $key) {
+                return count($user['indicacoes']);
+            });
+        } else if ($ordenado == 4) {
+            $sorted = $users->sortBy(function ($user, $key) {
+                return count($user['indicacoes']);
+            });
+        }
+        $users = $sorted->values()->all();
+        return $users;
     }
 }

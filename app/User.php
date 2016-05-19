@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     protected function getPhoto()
     {
-        if($this->getPhoto() == ''){
+        if ($this->getPhoto() == '') {
             return 'blank_user.jpg';
         }
     }
@@ -57,4 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Indicacao');
     }
+
+    public function getTotalIndicacoesAttribute()
+    {
+        return $this->hasMany('App\Indicacao')->where('user_id', $this->user_id)->count();
+    }
+
 }

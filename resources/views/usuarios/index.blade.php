@@ -9,14 +9,16 @@
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
           type='text/css'>
     <h1 class="text-center">Usuários</h1>
-    {{ Form::open(array('method'=> 'POST', 'url' => 'api/users/filtro')) }}
-        {{ Form::select('filtro', array('Ativos', 'Inativos','Administradores', 'Todos'), null , array('onchange' => 'this.form.submit()') )}}
-    {{--<select name="filtro" id="filtro" onchange="this.form.submit()">--}}
-        {{--<option value="1">Ativos</option>--}}
-        {{--<option value="2">Inativos</option>--}}
-        {{--<option value="3">Administradores</option>--}}
-        {{--<option value="4">Todos</option>--}}
-    {{--</select>--}}
+    {{ Form::open(array('method'=> 'POST', 'url' => 'usuarios/filtro', 'class' =>'form-horizontal')) }}
+    <div class="form-group col-sm-2">
+        <label class="col-sm-12">Filtrar usuários</label>
+        {{ Form::select('filtro', array('Ativos', 'Inativos','Administradores', 'Todos'), $selecionado , array('class' =>'form-control') )}}
+        <label class="col-sm-12">Ordenar</label>
+        {{ Form::select('ordem', array('Nome A-Z', 'Nome Z-A', 'Data de cadastro', 'Mais indicações', 'Menos indicações'), $ordenado , array('class' =>'form-control') )}}
+        <div class="col-sm-12" style="padding-top: 30px;">
+            {{ Form::submit('Filtrar',['class' =>'btn btn-primary center-block']) }}
+        </div>
+    </div>
     {{ Form::close() }}
     <br>
     @foreach($users as $user)
