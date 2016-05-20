@@ -5,6 +5,7 @@
     <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
 
     <h1 class="text-center">Usuários</h1>
+    <hr/>
     <div class="form-group col-sm-11 col-sm-offset-1">
         {{ Form::open(array('method'=> 'POST', 'url' => 'usuarios/filtro')) }}
         {{--<label class="col-sm-2 control-label">Filtrar usuários</label>--}}

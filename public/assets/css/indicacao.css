@@ -1,6 +1,12 @@
 html, body {
 }
-
+.indicacao-painel{
+    border-radius: 6px;
+    box-shadow: 2px 11px 10px 5px #888888;
+    padding-left: 0;
+    padding-right: 0;
+    color: dimgray;
+}
 .timeline {
     list-style-type: none;
     display: flex;
@@ -35,7 +41,7 @@ html, body {
     margin: 10px 0 10px 0;
 }
 
-.statusIndicacao {
+.status-indicacao {
     width: 25px;
     height: 25px;
     background-color: white;

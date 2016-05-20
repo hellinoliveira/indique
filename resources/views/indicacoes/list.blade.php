@@ -43,15 +43,28 @@
         }
 
     </style>
-    <link href="{{  url('assets/css/bootstrap.css') }}" rel="stylesheet"/>
+    <link href="{{  url('assets/css/indicacao.css') }}" rel="stylesheet"/>
     <link href="{{  url('assets/css/rotating-card.css') }}" rel="stylesheet"/>
 
     <h1 class="text-center">Indicações</h1>
     <hr/>
+    <div class="form-group col-sm-11 col-sm-offset-1">
+        {{ Form::open(array('method'=> 'POST', 'url' => 'indicacoes/filtro')) }}
+        <div class="form-group col-sm-2">
+            {{ Form::select('filtro', array('Em análise', 'Comercial','Vendido', 'Objeção'), null , array('class' =>'form-control') )}}
+        </div>
+        {{--<div class="form-group  col-sm-2">--}}
+            {{--{{ Form::select('ordem', array('Nome A-Z', 'Nome Z-A', 'Data de cadastro', 'Mais indicações', 'Menos indicações'), null , array('class' =>'form-control') )}}--}}
+        {{--</div>--}}
+        <div class="col-sm-1" >
+            {{ Form::submit('Filtrar',['class' =>'btn btn-primary center-block']) }}
+        </div>
+        {{ Form::close() }}
+    </div>
     @foreach( $indicacoes as $indicacao )
-        <div class="col-md-3">
+        <div class="col-xs-offset-1 col-xs-11 col-md-2 indicacao-painel ">
             <!-- STEPS -->
-            <div class="card-container">
+            <div class="card-container ">
                 <div class="card {{ $indicacao->cor_situacao }}">
                     <div class="front">
                         <div style="margin: 0 auto; font-size: 60px;"

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Indique</title>
     <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
-    <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
+
     <!-- todo versoes locais e atualizadas. reset css, html5 boilerplate -->
     <!-- Fonts -->
     <link href="{{  url('assets/css/font-awesome/css/font-awesome.min.css') }}" rel='stylesheet'

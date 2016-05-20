@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link href="{{  url('assets/css/reset.css') }}" rel='stylesheet' type='text/css'>
-    <link href="{{  url('assets/css/style.css') }}" rel='stylesheet' type='text/css'>
-    <script src="{{  url('assets/js/modernizr.js') }}"></script>
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet'
-          type='text/css'>
-
+    <link href="{{  url('assets/css/indicacao.css') }}" rel='stylesheet' type='text/css'>
+    
     <h1 class="text-center">Minhas indicacões</h1>
     <hr/>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -14,7 +10,7 @@
             {{--<article>--}}
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default ">
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$indicacao->id}}"
@@ -36,7 +32,7 @@
                                     <span class="date">{{ $indicacao->created_at->format('d/m/Y') }}</span>
                                 </div>
                                 <div class="status ANALISE">
-                                    <p class="statusIndicacao ANALISE "><i class="fa fa-clock-o"></i></p>
+                                    <p class="status-indicacao ANALISE "><i class="fa fa-clock-o"></i></p>
                                     <h4>Em análise</h4>
                                 </div>
                             </li>
@@ -47,7 +43,7 @@
                                         <span class="date">{{ $movimentacao->created_at->format('d/m/Y') }}</span>
                                     </div>
                                     <div class="status {{ $movimentacao->nome_situacao}}">
-                                        <p class="statusIndicacao {{ $movimentacao->nome_situacao}}"><i
+                                        <p class="status-indicacao {{ $movimentacao->nome_situacao}}"><i
                                                     class="fa {{ $movimentacao->icon_situacao  }}"></i></p>
                                         <h4>{{ $movimentacao->situacao_atual }}</h4>
                                     </div>
