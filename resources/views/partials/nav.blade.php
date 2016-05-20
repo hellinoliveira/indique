@@ -23,9 +23,9 @@
                 <li><a href="{{ url('/home') }}">Home</a></li>
                 @unless(Auth::guest())
                     <li>
-                        {{--<a href="{{ url('/indicacoes/') }}">Indicações <span class="badge">{{ $notificacoes}}</span></a>--}}
+                        <a href="{{ url('/indicacoes/') }}">Indicações <span class="badge">{{ $notificacoes}}</span></a>
                     </li>
-                    {{--<li><a href=""><i class="fa fa-dollar">{{ $total }}</i></a></li>--}}
+                    <li><a href=""><i class="fa fa-dollar">{{ $total }}</i></a></li>
                     @if(Auth::User()->is_admin)
                         <li><a href="{{ url('/usuarios/') }}">Usuários</a></li>
                     @endif

@@ -5,7 +5,7 @@
     </div>
     {{ Form::label('ramo_empresa', 'Ramo', ['class' => 'col-sm-1 control-label']) }}
     <div class="col-sm-4">
-        {{ Form::select('ramo_empresa', $ramos , $indicacao->ramo_empresa, ['class' =>'form-control']) }}
+        {{ Form::select('ramo_empresa', $ramos , null, ['class' =>'form-control']) }}
     </div>
 </div>
 <div class="form-group">

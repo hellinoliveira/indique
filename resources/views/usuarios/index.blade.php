@@ -5,17 +5,21 @@
     <link href="{{  url('assets/css/usuario.css') }}" rel='stylesheet' type='text/css'>
 
     <h1 class="text-center">Usuários</h1>
-    {{ Form::open(array('method'=> 'POST', 'url' => 'usuarios/filtro', 'class' =>'form-horizontal')) }}
-    <div class="form-group col-sm-2">
-        <label class="col-sm-12">Filtrar usuários</label>
-        {{ Form::select('filtro', array('Ativos', 'Inativos','Administradores', 'Todos'), $selecionado , array('class' =>'form-control') )}}
-        <label class="col-sm-12">Ordenar</label>
-        {{ Form::select('ordem', array('Nome A-Z', 'Nome Z-A', 'Data de cadastro', 'Mais indicações', 'Menos indicações'), $ordenado , array('class' =>'form-control') )}}
-        <div class="col-sm-12" style="padding-top: 30px;">
+    <div class="form-group col-sm-11 col-sm-offset-1">
+        {{ Form::open(array('method'=> 'POST', 'url' => 'usuarios/filtro')) }}
+        {{--<label class="col-sm-2 control-label">Filtrar usuários</label>--}}
+        <div class="form-group col-sm-2">
+            {{ Form::select('filtro', array('Ativos', 'Inativos','Administradores', 'Todos'), $selecionado , array('class' =>'form-control') )}}
+        </div>
+        {{--<label class="col-sm-2 control-label">Ordenar</label>--}}
+        <div class="form-group  col-sm-2">
+            {{ Form::select('ordem', array('Nome A-Z', 'Nome Z-A', 'Data de cadastro', 'Mais indicações', 'Menos indicações'), $ordenado , array('class' =>'form-control') )}}
+        </div>
+        <div class="col-sm-1" >
             {{ Form::submit('Filtrar',['class' =>'btn btn-primary center-block']) }}
         </div>
+        {{ Form::close() }}
     </div>
-    {{ Form::close() }}
     <br>
     @foreach($users as $user)
         <div class="col-xs-offset-1 col-xs-10 col-md-2 user-painel">
